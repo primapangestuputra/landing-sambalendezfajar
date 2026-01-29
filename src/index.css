@@ -1,0 +1,26 @@
+@import url("./assets/fonts/gambarino/gambarino.css");
+@import url("./assets/fonts/satoshi/satoshi.css");
+
+@import "tailwindcss";
+
+@theme {
+    --font-gambarino: "Gambarino", sans-serif;
+    --font-satoshiRegular: "Satoshi-Regular", sans-serif;
+    --font-satoshiMedium: "Satoshi-Medium", sans-serif;
+
+    --color-zero: #f97316;
+    --color-one: #d8cbb8;
+    --color-two: #d49653;
+    --color-three: #1a1a1a;
+    --color-four: #bfb4a3;
+    --color-five: #311512;
+    --color-six: #f1e6d2;
+    --color-seven: #c4844d;
+    --color-eight: #e2d7c5;
+    --color-nine: #78350f;
+    --color-ten: #92400e;
+}
+
+body {
+    margin: 0;
+}
