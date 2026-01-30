@@ -12,7 +12,7 @@ const Hero = () => {
         <>
             <section
                 id="hero-section"
-                className="relative w-full min-h-screen text-one"
+                className="relative w-full lg:min-h-screen text-eight"
             >
                 <div className="relative lg:absolute inset-0 w-full h-screen sm:h-[40rem] md:h-[32rem] lg:h-screen bg-transparent z-20">
                     <div className="relative flex flex-col w-full h-full gap-y-2 items-center justify-center sm:justify-start md:items-center md:justify-center text-center py-0 sm:py-[6rem] md:py-0">
@@ -83,7 +83,7 @@ const Hero = () => {
                 </div>
 
                 <div className="absolute inset-0 w-full h-screen sm:h-[40rem] md:h-[32rem] lg:h-screen overflow-hidden">
-                    <div className="absolute w-full h-full bg-black/70 z-10"></div>
+                    <div className="absolute w-full h-full bg-black/80 z-10"></div>
 
                     <img
                         src={HeroImg}
