@@ -4,7 +4,7 @@
 @import "tailwindcss";
 
 @theme {
-    --font-gambarino: "Gambarino", sans-serif;
+    --font-gambarino: "Gambarino-Regular", sans-serif;
     --font-satoshiRegular: "Satoshi-Regular", sans-serif;
     --font-satoshiMedium: "Satoshi-Medium", sans-serif;
 

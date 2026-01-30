@@ -1,9 +1,11 @@
-import "./App.css";
+import Hero from "./Hero";
 
 function App() {
     return (
         <>
-            <div className="w-full h-screen bg-green-200">Lorem</div>
+            <div className="appContainer min-h-screen bg-five">
+                <Hero />
+            </div>
         </>
     );
 }
