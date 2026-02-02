@@ -1,10 +1,101 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+
 import FirstImage from "./assets/images/card-img.jpeg";
 import SecondImage from "./assets/images/hero-img.jpg";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const About = () => {
+    const containerRef = useRef(null);
+    const lineFrameRef = useRef(null);
+    const firstImageRef = useRef(null);
+    const secondImageRef = useRef(null);
+
+    useGSAP(
+        () => {
+            const mm = gsap.matchMedia();
+
+            gsap.set(
+                [
+                    lineFrameRef.current,
+                    firstImageRef.current,
+                    secondImageRef.current,
+                ],
+                {
+                    left: "50%",
+                    top: "50%",
+                    xPercent: -50,
+                    yPercent: -50,
+                },
+            );
+
+            mm.add(
+                {
+                    isDesktop: "(min-width: 1024px) and (max-width: 1535px)",
+                    is2xl: "(min-width: 1536px)",
+                },
+                (context) => {
+                    let { is2xl } = context.conditions;
+
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: "30% bottom",
+                            end: "bottom bottom",
+                            scrub: 1,
+                        },
+                    });
+
+                    tl.to(
+                        lineFrameRef.current,
+                        {
+                            left: is2xl ? "60%" : "50%",
+                            top: "50%",
+                            xPercent: -50,
+                            yPercent: -50,
+                            rotation: is2xl ? 15 : 0,
+                        },
+                        0,
+                    )
+                        .to(
+                            firstImageRef.current,
+                            {
+                                left: is2xl ? "75%" : "60%",
+                                top: is2xl ? "50%" : "7%",
+                                xPercent: -50,
+                                yPercent: is2xl ? -50 : 0,
+                                rotation: 10,
+                                scale: 0.85,
+                            },
+                            0,
+                        )
+                        .to(
+                            secondImageRef.current,
+                            {
+                                left: is2xl ? "35%" : "10%",
+                                top: is2xl ? "50%" : "40%",
+                                bottom: is2xl ? "auto" : "10%",
+                                xPercent: is2xl ? -50 : 0,
+                                yPercent: is2xl ? -50 : 0,
+                                rotation: -10,
+                            },
+                            0,
+                        );
+                },
+            );
+        },
+        { scope: containerRef },
+    );
+
     return (
         <>
-            <section className="relative w-full 2xl:min-h-screen bg-[#f9faf3] text-three overflow-hidden">
+            <section
+                ref={containerRef}
+                className="relative w-full 2xl:min-h-screen bg-[#f9faf3] text-three overflow-hidden"
+            >
                 <div className="flex flex-col lg:flex-row w-full h-fit 2xl:h-screen gap-y-6 md:gap-y-10 px-0 2xl:px-[5rem] pt-14 md:pt-16 lg:py-16 2xl:py-[6rem]">
                     <div className="flex flex-col w-full lg:w-3/5 2xl:w-1/2 h-full gap-y-6 md:gap-y-8 2xl:gap-y-10 px-4 md:px-8 2xl:px-0">
                         <div className="flex items-center gap-x-2 lg:gap-x-3">
@@ -72,9 +163,15 @@ const About = () => {
                     </div>
 
                     <div className="absolute 2xl:relative hidden lg:flex w-2/5 2xl:w-1/2 h-full right-0 top-0">
-                        <div className="absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] bg-transparent border-2 border-ten left-1/2 2xl:left-[60%] top-1/2 -translate-x-1/2 -translate-y-1/2 2xl:rotate-15"></div>
+                        <div
+                            ref={lineFrameRef}
+                            className="will-change-transform absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] bg-transparent border-2 border-ten z-0"
+                        ></div>
 
-                        <div className="absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] left-[60%] 2xl:left-[75%] top-[7%] 2xl:top-1/2 -translate-x-1/2 2xl:-translate-y-1/2 rotate-10 scale-85 z-10 2xl:z-20 overflow-hidden">
+                        <div
+                            ref={firstImageRef}
+                            className="will-change-transform absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] z-10 2xl:z-20 overflow-hidden"
+                        >
                             <img
                                 src={FirstImage}
                                 alt=""
@@ -82,7 +179,10 @@ const About = () => {
                             />
                         </div>
 
-                        <div className="absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] left-[10%] 2xl:left-[35%] bottom-[10%] 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2 -rotate-10 z-20 2xl:z-10 overflow-hidden">
+                        <div
+                            ref={secondImageRef}
+                            className="will-change-transform absolute w-[20rem] 2xl:w-[28rem] h-[50%] 2xl:h-[90%] z-20 2xl:z-10 overflow-hidden"
+                        >
                             <img
                                 src={SecondImage}
                                 alt=""
