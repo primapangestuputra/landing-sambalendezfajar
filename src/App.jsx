@@ -1,5 +1,6 @@
 import Hero from "./Hero";
 import About from "./About";
+import Products from "./sections/products/Products";
 
 function App() {
     return (
@@ -8,6 +9,8 @@ function App() {
                 <Hero />
 
                 <About />
+
+                <Products />
             </div>
         </>
     );
