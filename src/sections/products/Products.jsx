@@ -1,11 +1,45 @@
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+
 import { products } from "../../constants/constants";
 import MainImage from "../../assets/images/hero-img.jpg";
+import { useRef } from "react";
 
 const Products = () => {
+    const containerRef = useRef(null);
+
+    useGSAP(
+        () => {
+            const sections = gsap.utils.toArray(".product-item");
+
+            sections.forEach((section) => {
+                const img = section.querySelector(".product-img");
+
+                gsap.set(img, {
+                    yPercent: 15,
+                });
+
+                gsap.to(img, {
+                    yPercent: -20,
+                    ease: "none",
+                    overwrite: true,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true,
+                    },
+                });
+            });
+        },
+        { scope: containerRef },
+    );
+
     return (
         <>
             <section className="w-full min-h-screen text-[#f9faf3] bg-five overflow-hidden">
-                <div className="flex flex-col w-full gap-y-14 md:gap-y-20 lg:gap-y-28 2xl:gap-y-30 px-4 sm:px-0 py-14 md:py-16 2xl:py-[6rem]">
+                <div className="flex flex-col w-full gap-y-14 md:gap-y-20 lg:gap-y-28 2xl:gap-y-30 px-4 sm:px-0 pt-14 md:pt-16 2xl:pt-[6rem]">
                     {/* Heading */}
                     <div className="flex flex-col w-full gap-y-4 lg:gap-y-10">
                         <div className="flex w-full justify-center items-center gap-x-2 lg:gap-x-3">
@@ -30,22 +64,24 @@ const Products = () => {
                     </div>
 
                     {/* Products Display */}
-                    <div className="flex flex-col w-full">
+                    <div ref={containerRef} className="flex flex-col w-full">
                         {products.map((item, index) => (
-                            <>
+                            <div
+                                key={`item-${index}`}
+                                className="product-item flex flex-col w-full"
+                            >
                                 <div
-                                    key={`item-${index}`}
                                     className={`flex flex-col sm:flex-row w-full gap-y-4 ${
                                         index % 2 === 0
                                             ? "sm:flex-row-reverse"
                                             : ""
                                     }`}
                                 >
-                                    <div className="flex w-full sm:w-1/2 h-[22rem] sm:h-screen md:h-[32rem] lg:h-screen bg-white overflow-hidden">
+                                    <div className="relative flex w-full sm:w-1/2 h-[22rem] sm:h-screen md:h-[32rem] lg:h-screen bg-white overflow-hidden">
                                         <img
-                                            src={MainImage}
+                                            src={item.firstImage}
                                             alt=""
-                                            className="w-full h-full object-cover"
+                                            className="product-img absolute w-full h-full object-cover scale-140"
                                         />
                                     </div>
 
@@ -84,7 +120,7 @@ const Products = () => {
                                 >
                                     <div className="w-full h-[0.5px] bg-two"></div>
                                 </div>
-                            </>
+                            </div>
                         ))}
                     </div>
                 </div>

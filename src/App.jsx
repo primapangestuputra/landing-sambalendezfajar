@@ -11,6 +11,8 @@ function App() {
                 <About />
 
                 <Products />
+
+                <div className="w-full h-screen bg-one"></div>
             </div>
         </>
     );

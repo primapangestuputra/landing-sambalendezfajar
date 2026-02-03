@@ -16,8 +16,8 @@ export const products = [
         price: "Rp 20.000",
         description:
             "Gurihnya teri Medan pilihan yang tetap renyah dalam balutan sambal autentik. Dibuat tanpa pengawet untuk menjaga kesegaran rasa di meja makan Anda.",
-        firstImage: FirstImage,
-        secondImage: SecondImage,
+        firstImage: SecondImage,
+        secondImage: FirstImage,
         href: "#",
     },
     {
@@ -34,8 +34,8 @@ export const products = [
         price: "Rp 18.000",
         description:
             "Aroma terasi udang bakar yang mewah dengan profil rasa pedas-gurih yang seimbang. Sambal klasik yang ditingkatkan kualitasnya ke level premium.",
-        firstImage: FirstImage,
-        secondImage: SecondImage,
+        firstImage: SecondImage,
+        secondImage: FirstImage,
         href: "#",
     },
 ];
